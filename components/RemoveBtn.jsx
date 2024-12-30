@@ -1,26 +1,20 @@
-"use client";
-import { useRouter } from "next/navigation";
 import { HiOutlineTrash } from "react-icons/hi";
 
-const RemoveBtn = ({ id }) => {
-  const router = useRouter()
+const RemoveBtn = ({ url, onDelete }) => {
+
   const handleDelete = async () => {
     // Show a confirmation prompt
     const confirmed = confirm("Are you sure you want to delete this topic?");
 
     if (confirmed) {
       try {
-        const response = await fetch(
-          `${process.env.url}/api/topics?id=${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(url, {
+          method: "DELETE",
+        });
 
         if (response.ok) {
-          // Handle successful deletion (e.g., notify user, refresh list)
-          console.log("Topic deleted successfully");
-          router.refresh()
+          // Call the onDelete callback to update the parent state
+          onDelete();
         } else {
           // Handle error response
           console.error("Failed to delete topic");

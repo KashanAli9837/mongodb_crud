@@ -1,23 +1,23 @@
+"use client";
+import Loader from "@/components/Loader";
 import TopicsList from "@/components/TopicsList";
+import useWebsiteUrl from "@/hooks/useWebsiteUrl";
 
-const Home = async () => {
-  const data = await fetch(`${process.env.url}/api/topics`, {
-    cache: "no-store",
-  });
+const Home = () => {
+  const websiteUrl = useWebsiteUrl();
 
-  // Check if the response is okay
-  if (!data.ok) {
-    return (
-      <div className="flex justify-center items-center flex-1">
-        <p className="text-lg font-semibold text-red-600">
-          Error fetching topics!
-        </p>
-      </div>
-    );
+  if (websiteUrl) {
+    return <TopicsList url={`${websiteUrl}/api/topics/`} />;
   }
 
-  const { topics } = await data.json();
-  return <TopicsList topics={topics} />;
+  return (
+    <div className="flex flex-col justify-center items-center flex-1">
+      <div className="text-lg font-semibold text-gray-700 mb-4">
+        Getting URL...
+      </div>
+      <Loader styles={"flex-none"} />
+    </div>
+  );
 };
 
 export default Home;

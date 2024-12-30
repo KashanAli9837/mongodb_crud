@@ -3,11 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const EditTopicForm = ({ url, topic }) => {
+const AddTopic = ({ url }) => {
   const router = useRouter();
+
+  // State to hold the input values in a single object
   const [formData, setFormData] = useState({
-    title: topic.title,
-    description: topic.description,
+    title: "",
+    description: "",
   });
 
   // Handle form submission
@@ -16,14 +18,15 @@ const EditTopicForm = ({ url, topic }) => {
 
     try {
       const response = await fetch(url, {
-        method: "PUT",
+        method: "POST", // Use POST method to create a new topic
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", // Set content type to JSON
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData), // Convert form data to JSON
       });
 
       if (!response.ok) {
+        console.log(url);
         throw new Error("Failed to create topic"); // Handle error if response is not okay
       }
 
@@ -50,7 +53,7 @@ const EditTopicForm = ({ url, topic }) => {
         className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md space-y-6 border border-slate-300"
       >
         <h2 className="text-3xl font-bold text-center text-blue-600 mb-4">
-          Update the Topic
+          Add a New Topic
         </h2>
 
         <div>
@@ -99,11 +102,11 @@ const EditTopicForm = ({ url, topic }) => {
           className="bg-blue-600 font-bold text-white rounded-lg px-6 py-3 transition duration-300 hover:bg-blue-700 w-full shadow-md hover:shadow-lg"
           type="submit"
         >
-          Update Topic
+          Add Topic
         </button>
       </form>
     </div>
   );
 };
 
-export default EditTopicForm;
+export default AddTopic;
