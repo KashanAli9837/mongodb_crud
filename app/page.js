@@ -1,7 +1,7 @@
 import TopicsList from "@/components/TopicsList";
 
 const Home = async () => {
-  const data = await fetch("http://localhost:3000/api/topics", {
+  const data = await fetch(`${process.env.url}/api/topics`, {
     cache: "no-store",
   });
 

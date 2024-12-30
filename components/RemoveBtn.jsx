@@ -11,7 +11,7 @@ const RemoveBtn = ({ id }) => {
     if (confirmed) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/topics?id=${id}`,
+          `${process.env.url}/api/topics?id=${id}`,
           {
             method: "DELETE",
           }

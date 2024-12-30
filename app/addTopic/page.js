@@ -17,7 +17,7 @@ const Page = () => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     try {
-      const response = await fetch("http://localhost:3000/api/topics", {
+      const response = await fetch(`${process.env.url}/api/topics`, {
         method: "POST", // Use POST method to create a new topic
         headers: {
           "Content-Type": "application/json", // Set content type to JSON

@@ -18,7 +18,7 @@ const EditTopicForm = ({ topic }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/topics/${topic._id}`,
+        `${process.env.url}/api/topics/${topic._id}`,
         {
           method: "PUT", // Use POST method to create a new topic
           headers: {
