@@ -16,7 +16,6 @@ const useFetch = ({ url, method }) => {
             cache: "no-store",
           }
         );
-        console.log(response);
 
         // Check if the response is okay
         if (!response.ok) {
